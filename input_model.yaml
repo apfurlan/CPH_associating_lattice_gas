@@ -1,0 +1,5 @@
+name : "Associating Lattice Gas"
+ndim : 2
+ncoord : 6
+L : 32
+nstates : 3

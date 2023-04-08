@@ -37,12 +37,10 @@ void read_yaml(std::string fn) {
         
      } else {
         std::cout << "It is not a sequence" << std::endl;
-     
-        for (std::size_t i = 0; i < no.size(); i++) {
-           YAML::Node node = no[i];
-
-        // Imprimindo o valor de cada nó
-            std::cout << "Valor do nó " << i << ": " << node << std::endl;
+        std::cout << no << std::endl ;
+        //if (no.IsNull()) {
+        //    std::cout << "Erro" << std::endl;
+        //}
     }
 
     //     for (auto node : no ) {
@@ -54,7 +52,7 @@ void read_yaml(std::string fn) {
 
     //     // Imprimir o nome do campo e o valor correspondente
     //     std::cout << nome_campo << ": " << valor_campo << std::endl;
-    }
+    
 
 
     // Processar o conteúdo do nó YAML

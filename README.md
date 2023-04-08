@@ -13,7 +13,7 @@ para todos os sítios da rede. Ela necessaita dos seguintes parâmetros de
 entrada : 
     - L : Dimensões Laterais da rede
     - ndim : Número de dimensões da rede
-    - N : Número total de sítios da rede ->  N = L**(ndim)
+    - N : Número total de sítios da rede ->  $N = L^{(ndim)}$
     - ncoord : número vizinhos (numero de coordenação)
     - nn : lista de vizinhos
 

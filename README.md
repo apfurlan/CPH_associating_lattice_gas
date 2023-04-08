@@ -2,7 +2,32 @@
 
 Este repositório consiste de um conjunto de classes, métodos e modelos que 
 desenvolvi ao longo dos anos que podem ajudar no desenvolvimento de códigos 
-de simulação de Monte Carlo em modelos definidos em redes regulares. As 
+de simulação de Monte Carlo em modelos definidos em redes regulares. O fluxo
+do código segue o seguinte estrutura. O arquivo de definição do modelo 
+(`input_model.yaml`) é lido pela função read_input. Em linhas gerais essa
+função faz o parse de um arquivo .yaml e armazena todas as features
+do modelo. A estrutura do arquivo de definição `input_model.yaml` é : 
+
+    general :
+        - name : "Name of model/simulations"
+    geometry :
+        - L : 32
+        - ndin : 2 
+        - ncoord : 4
+    simulation :
+        - method : metropolis
+        - termaliztion_steps : 10000
+        - store_averages_steps : 10000
+    output :
+        - window : 400
+        - files : 
+            - file_1 : "output_file_1.dat"
+            - quantities : 
+
+                
+
+
+As 
 topologias já implementadas são, quadrada, triangular, cúbica e FCC. 
 
 

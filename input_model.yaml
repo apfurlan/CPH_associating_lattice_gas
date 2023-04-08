@@ -1,3 +1,15 @@
-name : "Associating Lattice Gas"
-ndim : 2
-ncoord : 6
+    general :
+        - name : "Name of model/simulations"
+    geometry :
+        - L : 32
+        - ndin : 2 
+        - ncoord : 4
+    simulation :
+        - method : metropolis
+        - termaliztion_steps : 10000
+        - store_averages_steps : 10000
+    output :
+        - window : 400
+        - files : 
+            - file_1 : "output_file_1.dat"
+            - quantities : 

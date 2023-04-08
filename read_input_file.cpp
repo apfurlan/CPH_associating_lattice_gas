@@ -13,30 +13,32 @@ void read_yaml(std::string fn) {
     //Ler o conteúdo do arquivo YAML em um nó YAML
     YAML::Node no = YAML::Load(input_file);
 
-    if (no.IsSequence())
-    {
-        std::cout << no << std::endl ; 
-        // Percorrer todos os elementos da sequência
-        for (YAML::iterator it = no.begin(); it != no.end(); ++it)
-        {
-            // Verificar se o elemento é um mapa (ou seja, um dicionário)
-            if (it->IsMap())
-            {
-                // Percorrer todos os campos do mapa
-                for (YAML::const_iterator map_it = it->begin(); map_it != it->end(); ++map_it)
-                {
-                    // Obter o nome do campo e o valor correspondente
-                    std::string nome_campo = map_it->first.as<std::string>();
-                    YAML::Node valor_campo = map_it->second;
+    // if (no.IsSequence())
+    // {
+    //     std::cout << no << std::endl ; 
+    //     // Percorrer todos os elementos da sequência
+    //     for (YAML::iterator it = no.begin(); it != no.end(); ++it)
+    //     {
+    //         // Verificar se o elemento é um mapa (ou seja, um dicionário)
+    //         if (it->IsMap())
+    //         {
+    //             // Percorrer todos os campos do mapa
+    //             for (YAML::const_iterator map_it = it->begin(); map_it != it->end(); ++map_it)
+    //             {
+    //                 // Obter o nome do campo e o valor correspondente
+    //                 std::string nome_campo = map_it->first.as<std::string>();
+    //                 YAML::Node valor_campo = map_it->second;
 
-                    // Imprimir o nome do campo e o valor correspondente
-                    std::cout << nome_campo << ": " << valor_campo << std::endl;
-                }
-            }
-        }
+    //                 // Imprimir o nome do campo e o valor correspondente
+    //                 std::cout << nome_campo << ": " << valor_campo << std::endl;
+    //             }
+    //         }
+    //     }
         
-     } else {
+     //} else {
         for (auto it = no.begin(); it != no.end(); ++it) {
+            
+
             std::string key = it->first.as<std::string>(); 
             std::cout << "Nome da chave: " << key <<  std::endl;
         }     //if (it.IsSequence()) {
@@ -47,7 +49,7 @@ void read_yaml(std::string fn) {
 
 
        
-     }
+     //}
     return ; 
 }
 

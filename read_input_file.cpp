@@ -7,163 +7,65 @@ void read_yaml(std::string filename) ;
 
 void read_yaml(std::string fn) {
 
+    std::string simulation_name ; //method ; 
+    int ndimm ; 
+    int Lx, Ly, Lz;  
+   // int termaliztion_steps, store_averages_steps ; 
     // std::ifstream input_file("input_model.yaml");
     std::ifstream input_file(fn);
 
     //Ler o conteúdo do arquivo YAML em um nó YAML
-    YAML::Node no = YAML::Load(input_file);
+    YAML::Node doc = YAML::Load(input_file);
 
-    // if (no.IsSequence())
-    // {
-    //     std::cout << no << std::endl ; 
-    //     // Percorrer todos os elementos da sequência
-    //     for (YAML::iterator it = no.begin(); it != no.end(); ++it)
-    //     {
-    //         // Verificar se o elemento é um mapa (ou seja, um dicionário)
-    //         if (it->IsMap())
-    //         {
-    //             // Percorrer todos os campos do mapa
-    //             for (YAML::const_iterator map_it = it->begin(); map_it != it->end(); ++map_it)
-    //             {
-    //                 // Obter o nome do campo e o valor correspondente
-    //                 std::string nome_campo = map_it->first.as<std::string>();
-    //                 YAML::Node valor_campo = map_it->second;
+  // Access the values in the YAML document
+  std::string name = doc["general"]["name"].as<std::string>();
+  int ndim = doc["geometry"]["ndim"].as<int>();
+  if (ndim == 2) {
+        Lx = doc["geometry"]["Lx"].as<int>();
+        Ly = doc["geometry"]["Ly"].as<int>();
+  } else if (ndim == 3) {
+        Lx = doc["geometry"]["Lx"].as<int>();
+        Ly = doc["geometry"]["Ly"].as<int>();
+        Lz = doc["geometry"]["Ly"].as<int>();
+  }
+  int ncoord = doc["geometry"]["ncoord"].as<int>();
+  
+  std::string method = doc["simulation"]["method"].as<std::string>();
+  int termalization_steps = doc["simulation"]["termaliztion_steps"].as<int>();
+  int store_averages_steps = doc["simulation"]["store_averages_steps"].as<int>();
+  int window = doc["output"]["window"].as<int>();
 
-    //                 // Imprimir o nome do campo e o valor correspondente
-    //                 std::cout << nome_campo << ": " << valor_campo << std::endl;
-    //             }
-    //         }
-    //     }
-        
-     //} else {
-        for (auto it = no.begin(); it != no.end(); ++it) {
-            
+  // Access the file names and quantities for each output file
+  YAML::Node files = doc["output"]["files"];
+  for (auto file : files) {
+    std::string filename = file["filename"].as<std::string>();
+    std::cout << "Output file: " << filename << std::endl;
+    YAML::Node quantities = file["quantities"];
+    for (auto quantity : quantities) {
+      std::string quantity_name = quantity.as<std::string>();
+      std::cout << "  Quantity: " << quantity_name << std::endl;
+    }
+  }
 
-            std::string key = it->first.as<std::string>(); 
-            std::cout << "Nome da chave: " << key <<  std::endl;
-        }     //if (it.IsSequence()) {
-             //   std::cout << "é " <<  std::endl;
-             //} else {
-             //s  std::cout << "nao é " <<  std::endl;
-             //} 
+  // Print the values to the console
+  std::cout << "Name: " << name << std::endl;
+  std::cout << "ndim: " << ndim << std::endl;
+  std::cout << "Lx: " << Lx << std::endl;
+  std::cout << "Ly: " << Ly << std::endl;
+  std::cout << "ncoord: " << ncoord << std::endl;
+  std::cout << "Method: " << method << std::endl;
+  std::cout << "Termalization steps: " << termalization_steps << std::endl;
+  std::cout << "Store averages steps: " << store_averages_steps << std::endl;
+  std::cout << "Window: " << window << std::endl;
 
-
-       
-     //}
-    return ; 
-}
-
-int main(int argc, char* argv[])
-{
-
-  std::string fn = argv[1] ;//"filename.conf";
-
-    read_yaml(fn) ;
- 
-    // std::ifstream input_file("input_model.yaml");
-
-    // //Ler o conteúdo do arquivo YAML em um nó YAML
-    // YAML::Node no = YAML::Load(input_file);
-
-    // // Processar o conteúdo do nó YAML
-    // std::string name = no["name"].as<std::string>();
-    // int ndim = no["ndim"].as<int>();
-    // int ncoord = no["ncoord"].as<int>();
-
-    // // Imprimir os valores lidos do arquivo YAML
-    // std::cout << "Name: " << name << std::endl;
-    // std::cout << "No of dimensions: " << ndim << std::endl;
-    // std::cout << "ncoord: " << ncoord << std::endl;
-    //here the function to parse yaml file
-  //}
+  return ;
 }
 
 
-// void read_yaml(std::string fn) {
+// int main(int argc, char* argv[])
+// {
 
-//     // std::ifstream input_file("input_model.yaml");
-//     std::ifstream input_file(fn);
+//   std::string fn = argv[1] ;//"filename.conf";
 
-//     //Ler o conteúdo do arquivo YAML em um nó YAML
-//     YAML::Node no = YAML::Load(input_file);
-
-//     // Processar o conteúdo do nó YAML
-//     std::string name = no["name"].as<std::string>();
-//     int ndim = no["ndim"].as<int>();
-//     int ncoord = no["ncoord"].as<int>();
-
-//     // Imprimir os valores lidos do arquivo YAML
-//     std::cout << "Name: " << name << std::endl;
-//     std::cout << "No of dimensions: " << ndim << std::endl;
-//     std::cout << "ncoord: " << ncoord << std::endl;
-
-//     return ; 
-// }
-
-
-
-    // Verificar se o nó é uma sequência (ou seja, um vetor)
-//     if (no.IsSequence())
-//     {
-//         // Percorrer todos os elementos da sequência
-//         for (YAML::iterator it = no.begin(); it != no.end(); ++it)
-//         {
-//             // Verificar se o elemento é um mapa (ou seja, um dicionário)
-//             if (it->IsMap())
-//             {
-//                 // Percorrer todos os campos do mapa
-//                 for (YAML::const_iterator map_it = it->begin(); map_it != it->end(); ++map_it)
-//                 {
-//                     // Obter o nome do campo e o valor correspondente
-//                     std::string nome_campo = map_it->first.as<std::string>();
-//                     YAML::Node valor_campo = map_it->second;
-
-//                     // Imprimir o nome do campo e o valor correspondente
-//                     std::cout << nome_campo << ": " << valor_campo << std::endl;
-//                 }
-//             }
-//         }
-//     }
-
-//     return 0;
-// }
-
-
-
-
-
-    //     for (auto node : no ) {
-    //         std::cout << "aawww" << std::endl;
-    //         std::cout << "Nome do nó: " << node.Tag() << std::endl;
-    // }
-        //std::string nome_campo = map_it->first.as<std::string>();
-    //     YAML::Node valor_campo = map_it->second;
-
-    //     // Imprimir o nome do campo e o valor correspondente
-    //     std::cout << nome_campo << ": " << valor_campo << std::endl;
-    
-
-
-    // Processar o conteúdo do nó YAML
-    // std::string name = no["general"]["name"].as<std::string>();
-    // int L = no["geometry"]["L"].as<int>();
-    // int ndim = no["geometry"]["ndim"].as<int>();
-    // int ncoord = no["geometry"]["ncoord"].as<int>();
-    // std::string method = no["simulation"]["method"].as<std::string>();
-    // int thermalization_steps = no["simulation"]["termaliztion_steps"].as<int>();
-    // int store_averages_steps = no["simulation"]["store_averages_steps"].as<int>();
-    // int window = no["output"]["window"].as<int>();
-    // std::string output_file_1 = no["output"]["files"][0]["filename_1"].as<std::string>();
-    // int quantidade_1 = no["output"]["files"]["quantities"][0].as<std::string>();
-
-    // // Imprimir os valores lidos do arquivo YAML
-    // std::cout << "Name: " << name << std::endl;
-    // std::cout << "linear size : " << L << std::endl;
-    // std::cout << "No of dimensions: " << ndim << std::endl;
-    // std::cout << "ncoord: " << ncoord << std::endl;
-    // std::cout << "method: " << method << std::endl;
-    // std::cout << "thermalization_steps: " << thermalization_steps << std::endl;
-    // std::cout << "store_averages_steps: " << store_averages_steps << std::endl;
-    // std::cout << "output_file_1: " << output_file_1 << std::endl;
-    //std::cout << "quantidades: " << quantidade_1 << std::endl;
-    
+//     read_yaml(fn) ;
+// } 

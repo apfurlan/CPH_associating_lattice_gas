@@ -2,16 +2,22 @@ general :
   name : "Name of model/simulations"
 geometry :
   ndim : 2 
-  ncoord : 4
   Lx : 32
   Ly : 32
+  ncoord : 4
 simulation :
-  method : metropolis
+  method : "metropolis" #wang-landau, 
   termaliztion_steps : 10000
   store_averages_steps : 10000
 output :
   window : 400
   files : 
-    - filename_1 : "output_file_1.dat"
+    - filename : "output_file_1.dat"
       quantities :
         - occupancy 
+        - density
+        - temperature
+    - filename : "output_file_2.dat"
+      quantities : 
+        - energy
+        - DOS 

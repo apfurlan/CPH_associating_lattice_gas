@@ -10,8 +10,7 @@ void read_yaml(std::string fn) {
     std::string simulation_name ; //method ; 
     int ndimm ; 
     int Lx, Ly, Lz;  
-   // int termaliztion_steps, store_averages_steps ; 
-    // std::ifstream input_file("input_model.yaml");
+   
     std::ifstream input_file(fn);
 
     //Ler o conteúdo do arquivo YAML em um nó YAML
@@ -38,9 +37,11 @@ void read_yaml(std::string fn) {
   // Access the file names and quantities for each output file
   YAML::Node files = doc["output"]["files"];
   for (auto file : files) {
+    
     std::string filename = file["filename"].as<std::string>();
     std::cout << "Output file: " << filename << std::endl;
     YAML::Node quantities = file["quantities"];
+    
     for (auto quantity : quantities) {
       std::string quantity_name = quantity.as<std::string>();
       std::cout << "  Quantity: " << quantity_name << std::endl;
@@ -69,3 +70,22 @@ void read_yaml(std::string fn) {
 
 //     read_yaml(fn) ;
 // } 
+
+
+class input{
+
+  string property ;
+
+  public :
+
+  void get_file(path)
+    this path=path ; 
+
+  string getproperty(property)
+
+} ; 
+
+
+int main(){
+  input input_file ; 
+}
